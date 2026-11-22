@@ -27,38 +27,14 @@ Service Reliability & Auto-Recovery: Implemented container startup dependencies 
 
 Custom Domain & DNS Integration: Configured custom domain routing via DNS A records (@ and www) pointing directly to the cloud server's public IPv4 endpoint.
 
-🏗️ Three-Tier System Architecture
+## 🏗️ Three-Tier System Architecture
 
-                       Internet / Client Browser
-                                  │
-                        Public Domain / EC2 IP
-                                  │
-                                  ▼
-┌───────────────────────────────────────────────────────────────────┐
-│ AWS EC2 Instance (Ubuntu 24.04 LTS)                               │
-│                                                                   │
-│  ┌─────────────────────────────────────────────────────────────┐  │
-│  │ Custom Docker Bridge Network: travel-net                    │  │
-│  │                                                             │  │
-│  │  ┌───────────────────────┐                                  │  │
-│  │  │   travel-frontend     │  (Port 80:80)                    │  │
-│  │  │   Nginx Reverse Proxy │  Serves UI & proxies /api/*      │  │
-│  │  └───────────┬───────────┘                                  │  │
-│  │              │ Internal DNS: travel-backend:5000            │  │
-│  │              ▼                                              │  │
-│  │  ┌───────────────────────┐                                  │  │
-│  │  │    travel-backend     │  (Port 5000:5000)                │  │
-│  │  │  Node.js / Express    │  REST API & Session Auth         │  │
-│  │  └───────────┬───────────┘                                  │  │
-│  │              │ Internal DNS: travel-db:3306                 │  │
-│  │              ▼                                              │  │
-│  │  ┌───────────────────────┐      ┌────────────────────────┐  │  │
-│  │  │       travel-db       │─────▶│ Host Bind Mount Volume │  │  │
-│  │  │      MySQL 8.0        │      │ /home/ubuntu/travel-   │  │  │
-│  │  │  (DB: travelbooking)  │      │ backup/mysql-data      │  │  │
-│  │  └───────────────────────┘      └────────────────────────┘  │  │
-│  └─────────────────────────────────────────────────────────────┘  │
-└───────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    Client["🌐 Internet / Client Browser<br/>(Public Domain / EC2 IP)"] -->|HTTP :80| Frontend["🖥️ travel-frontend (Port 80:80)<br/>Nginx Reverse Proxy & Static UI"]
+    Frontend -->|Internal DNS: travel-backend:5000| Backend["⚙️ travel-backend (Port 5000:5000)<br/>Node.js / Express REST API & Auth"]
+    Backend -->|Internal DNS: travel-db:3306| DB[("🗄️ travel-db (MySQL 8.0)<br/>Database: travelbooking")]
+    DB --- Volume["💾 Persistent Host Volume<br/>/home/ubuntu/travel-backup/mysql-data"]
 
 
 🚀 Tech Stack
