@@ -29,12 +29,11 @@ Custom Domain & DNS Integration: Configured custom domain routing via DNS A reco
 
 ## 🏗️ Three-Tier System Architecture
 
-```mermaid
-flowchart TD
-    Client["🌐 Internet / Client Browser<br/>(Public Domain / EC2 IP)"] -->|HTTP :80| Frontend["🖥️ travel-frontend (Port 80:80)<br/>Nginx Reverse Proxy & Static UI"]
-    Frontend -->|Internal DNS: travel-backend:5000| Backend["⚙️ travel-backend (Port 5000:5000)<br/>Node.js / Express REST API & Auth"]
-    Backend -->|Internal DNS: travel-db:3306| DB[("🗄️ travel-db (MySQL 8.0)<br/>Database: travelbooking")]
-    DB --- Volume["💾 Persistent Host Volume<br/>/home/ubuntu/travel-backup/mysql-data"]
+| Tier | Container | Technology | Port | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| **Presentation & Proxy** | `travel-frontend` | Nginx | `80:80` | Serves the frontend UI and proxies `/api/*` requests to the backend |
+| **Application Logic** | `travel-backend` | Node.js / Express | `5000:5000` | Handles REST API endpoints, bookings, and admin session authentication |
+| **Database & Storage** | `travel-db` | MySQL 8.0 | Internal (`3306`) | Stores the `travelbooking` database with persistent host storage |
 
 
 🚀 Tech Stack
@@ -54,15 +53,17 @@ Database: MySQL 8.0
 DNS & Version Control: Custom DNS (A Records), Git, GitHub
 
 
-📂 Project Structure
+## 📁 Project Structure
 
+```text
 TravelBooking/
-├── client/                  # Tier 1: Frontend UI & Nginx reverse proxy config
-│   ├── Dockerfile
-│   └── nginx.conf
-├── server/                  # Tier 2: Node.js & Express REST API
-│   └── Dockerfile
-├── screenshots/             # Application UI screenshots
-├── docker-compose.yml       # Multi-container orchestration & network definition
-├── .gitignore               # Excludes .env and local artifacts from Git
-└── README.md                # Project documentation
+├── client/                 # Tier 1: Frontend UI & Nginx reverse proxy config[cite: 10]
+│   ├── Dockerfile[cite: 10]
+│   └── nginx.conf[cite: 10]
+├── server/                 # Tier 2: Node.js & Express REST API[cite: 10]
+│   └── Dockerfile[cite: 10]
+├── screenshots/            # Application UI screenshots[cite: 10]
+├── docker-compose.yml      # Multi-container orchestration & network definition[cite: 10]
+├── .gitignore              # Excludes .env and local artifacts from Git[cite: 10]
+└── README.md               # Project documentation[cite: 10]
+```
