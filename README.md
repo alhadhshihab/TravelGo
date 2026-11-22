@@ -5,7 +5,8 @@ TravelGo is a full-stack travel booking web application architected, containeriz
 📸 Application Screenshots
 <img width="1907" height="1038" alt="Screenshot 2026-11-22 121133" src="https://github.com/user-attachments/assets/867896df-3fa1-44fc-8441-2a7f030a71fd" />
 <img width="1901" height="1037" alt="Screenshot 2026-11-22 121203" src="https://github.com/user-attachments/assets/dd267681-28d4-4218-963e-4ceb4a077360" />
-<img width="1901" height="1037" alt="Screenshot 2026-11-22 121203" src="https://github.com/user-attachments/assets/58940d1b-aff3-4700-bdf3-6063e799e34a" />
+<img width="1892" height="1036" alt="Screenshot 2026-11-22 121229" src="https://github.com/user-attachments/assets/5154f0ec-406a-415d-8eba-5983cdb983a3" />
+
 
 1. Customer Booking Interface
 
