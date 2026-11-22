@@ -1,0 +1,49 @@
+services:
+  travel-db:
+    image: mysql:8.0
+    container_name: travel-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: travelbooking
+    volumes:
+      - /home/ubuntu/travel-backup/mysql-data:/var/lib/mysql
+    networks:
+      - travel-net
+
+  travel-backend:
+    build: ./server
+    image: alhadhshihab/travel-backend:v1
+    container_name: travel-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      DB_HOST: travel-db
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: travelbooking
+      SESSION_SECRET: ${SESSION_SECRET}
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    depends_on:
+      - travel-db
+    networks:
+      - travel-net
+
+  travel-frontend:
+    build: ./client
+    image: alhadhshihab/travel-frontend:v1
+    container_name: travel-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - travel-backend
+    networks:
+      - travel-net
+
+networks:
+  travel-net:
+    external: true
