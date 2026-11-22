@@ -7,11 +7,6 @@ TravelGo is a full-stack travel booking web application architected, containeriz
 <img width="1901" height="1037" alt="Screenshot 2026-11-22 121203" src="https://github.com/user-attachments/assets/dd267681-28d4-4218-963e-4ceb4a077360" />
 <img width="1892" height="1036" alt="Screenshot 2026-11-22 121229" src="https://github.com/user-attachments/assets/5154f0ec-406a-415d-8eba-5983cdb983a3" />
 
-
-1. Customer Booking Interface
-
-2. Admin Dashboard & Booking Management
-
 🛠️ Key Implementations & Project Highlights
 
 Multi-Container Dockerization: Packaged the frontend and backend services into custom Docker images (alhadhshihab/travel-frontend:v1 and alhadhshihab/travel-backend:v1) and published them to Docker Hub for consistent, portable deployment across environments.
